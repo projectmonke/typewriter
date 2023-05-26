@@ -40,13 +40,20 @@ fn main() {
         if atty::is(atty::Stream::Stdin) {
             println!("No stdin found.");
         } else {
-            io::stdin()
+            let generated_domains: HashSet<String> = io::stdin()
                 .lock()
                 .lines()
-                .for_each(|x| println!("{}", x.expect("Error from stdin")));
+                .filter_map(Result::ok)
+                .map(|line| line.replace(' ', ""))
+                .filter(|line| line.split('.').count() >= 2)
+                .collect::<HashSet<String>>();
+
+            for domain in generated_domains.iter(){
+                permutator(domain, &generated_domains, &generated_permutations, typewriter.depth, true);
+            }
         }
     } else if let Some(file) = typewriter.filename {
-        let generated_domains = generate_domains(file).expect("Failed to generate domains.");
+        let generated_domains = generate_domains_from_file(file).expect("Failed to generate domains.");
         for domain in generated_domains.iter(){
             permutator(domain, &generated_domains, &generated_permutations, typewriter.depth, true);
         }
@@ -108,7 +115,7 @@ fn permutator(domain: &str, domains: &HashSet<String>, permutations: &HashSet<St
     }
 }
 
-fn generate_domains(filename: String) -> io::Result<HashSet<String>> {
+fn generate_domains_from_file(filename: String) -> io::Result<HashSet<String>> {
     let domains_file = File::open(filename)?;
     let mut domains = HashSet::new();
     
@@ -122,7 +129,6 @@ fn generate_domains(filename: String) -> io::Result<HashSet<String>> {
     }
     Ok(domains.into_iter().collect())
 }
-
 
 fn generate_permutations(filename: String, permutation_number: i32) -> io::Result<HashSet<String>> {
     let file = File::open(filename)?;
