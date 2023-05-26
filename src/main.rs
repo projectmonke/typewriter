@@ -15,6 +15,10 @@ struct Typewriter {
     #[clap(short = 'd', long = "depth", default_value = "1")]
     depth: i32,
 
+    /// The amount of range for generating permutations with numbers in them such as test1.example.com.
+    #[clap(short = 'r', long = "range", default_value = "1")]
+    range: i32,
+
     /// Ingest subdomains from stdin
     #[clap(short = 's', long = "stdin")]
     stdin: bool,
@@ -34,7 +38,7 @@ struct Typewriter {
 
 fn main() {
     let typewriter = Typewriter::parse();
-    let generated_permutations = generate_permutations(typewriter.wordlist, typewriter.depth).expect("Failed to generate permutations");
+    let generated_permutations = generate_permutations(typewriter.wordlist, typewriter.range).expect("Failed to generate permutations");
     
     if typewriter.stdin {
         if atty::is(atty::Stream::Stdin) {

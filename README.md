@@ -2,8 +2,10 @@
 <p align="center"><b>Typewriter</b> is a subdomain permutation tool written in Rust and heavily based on Gotator.</p>
 
 ## Features
-- Permutations with the `-` character.
-- Unlimited depth, limited only by your computer.
+- Permutations with the `-` character!
+- Unlimited depth, limited only by your computer!
+- Deduplication by default!
+---
 
 ## Installation
 `git clone https://github.com/projectmonke/typewriter && cd typewriter && cargo build --release && cp target/release/typewriter .`
@@ -16,12 +18,10 @@
 ## Example
 [puredns](https://github.com/d3mondev/puredns) is recommended for resolving subdomains.
 - `./typewriter -w six.txt -i example.com -d 2 > results.txt`
-- `subfinder -d example.com > example_subs.txt` + `./typewriter -w six.txt -f example_subs.txt -d 2`
+- `subfinder -d example.com | ./typewroter -w six.txt -s -r 5 -d 2`
 
 ## Limitations
-- `stdin` doesn't work yet for piping directly into it.
+- Domain validation is not robust at all. Still fixing this.
 
 ## To Do
-- `stdin` support.
-- Flag for writing to a text file directly.
 - Flag for configuring the range of numbers beyond +-1 in number-inclusive permutations.
