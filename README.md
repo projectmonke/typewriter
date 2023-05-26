@@ -18,7 +18,7 @@
 ## Example
 [puredns](https://github.com/d3mondev/puredns) is recommended for resolving subdomains.
 - `./typewriter -w six.txt -i example.com -d 2 > results.txt`
-- `subfinder -d example.com | ./typewroter -w six.txt -s -r 5 -d 2`
+- `subfinder -d example.com | ./typewriter -w six.txt -s -r 5 -d 2`
 
 ## Limitations
 - Domain validation is not robust at all. Still fixing this.
