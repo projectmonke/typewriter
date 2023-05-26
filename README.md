@@ -24,4 +24,4 @@
 - Domain validation is not robust at all. Still fixing this.
 
 ## To Do
-- Flag for configuring the range of numbers beyond +-1 in number-inclusive permutations.
+- Flag for writing to an output file.
