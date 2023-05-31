@@ -31,3 +31,5 @@
 
 ## To Do
 - Flag for writing to an output file.
+- Support for infinitely recursive permutation generation.
+- More robust domain checks using an array of TLDs to validate the strings.
